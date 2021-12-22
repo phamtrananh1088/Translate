@@ -1,0 +1,8 @@
+/.vs/CallAPI_TranslateGoogleNihongo/v14/.suo
+/.vs/DB definition diagram _WRS/v14/*.suo
+*.suo
+*.user
+/GoogleReadText/GoogleReadText/obj/Debug
+/Translate NihonGo/obj/Debug
+/TranslateJPENAssembly/obj/Debug
+/音声/obj/Debug

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslateJPENAssembly", "TranslateJPENAssembly\TranslateJPENAssembly.csproj", "{A6677024-BDE4-4D9D-AE78-362309D4255C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "音声", "音声\音声.csproj", "{7A51FAB1-B942-4CA6-951C-D18BBCEE765F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleReadText", "GoogleReadText\GoogleReadText\GoogleReadText.csproj", "{37D24BE7-D119-4C22-928E-09C5892F4C38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate NihonGo", "Translate NihonGo\Translate NihonGo.csproj", "{5ECB4ADD-BF1B-45CA-9CF1-17A8DB2DA1FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6677024-BDE4-4D9D-AE78-362309D4255C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6677024-BDE4-4D9D-AE78-362309D4255C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6677024-BDE4-4D9D-AE78-362309D4255C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6677024-BDE4-4D9D-AE78-362309D4255C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A51FAB1-B942-4CA6-951C-D18BBCEE765F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A51FAB1-B942-4CA6-951C-D18BBCEE765F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A51FAB1-B942-4CA6-951C-D18BBCEE765F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A51FAB1-B942-4CA6-951C-D18BBCEE765F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D24BE7-D119-4C22-928E-09C5892F4C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D24BE7-D119-4C22-928E-09C5892F4C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D24BE7-D119-4C22-928E-09C5892F4C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D24BE7-D119-4C22-928E-09C5892F4C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ECB4ADD-BF1B-45CA-9CF1-17A8DB2DA1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ECB4ADD-BF1B-45CA-9CF1-17A8DB2DA1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ECB4ADD-BF1B-45CA-9CF1-17A8DB2DA1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ECB4ADD-BF1B-45CA-9CF1-17A8DB2DA1FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18650CCC-A041-4D34-969F-339DF86EC890}
+	EndGlobalSection
+EndGlobal
