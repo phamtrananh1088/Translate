@@ -36,6 +36,7 @@
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.cbSheetName = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.rbSelectSheet = new System.Windows.Forms.RadioButton();
@@ -51,7 +52,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnKanji = new System.Windows.Forms.Button();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numF)).BeginInit();
@@ -127,6 +127,12 @@
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(15, 17);
+            this.toolStripStatusLabel3.Text = "1";
             // 
             // cbSheetName
             // 
@@ -307,12 +313,6 @@
             this.btnKanji.UseVisualStyleBackColor = false;
             this.btnKanji.Click += new System.EventHandler(this.btnKanji_Click);
             // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(15, 17);
-            this.toolStripStatusLabel3.Text = "1";
-            // 
             // RD00120
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -333,6 +333,7 @@
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtExcelName);
             this.Name = "RD00120";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Translate WorkBook(.xls) [ja->en,vi]";
             this.Load += new System.EventHandler(this.RD00120_Load);
             this.statusStrip1.ResumeLayout(false);

@@ -32,22 +32,31 @@ namespace Anh.DB_definition_diagram__WRS
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtKanji = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPTestKanji = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblCountFail = new System.Windows.Forms.Label();
+            this.lblCountSuccess = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnShuffle = new System.Windows.Forms.Button();
             this.pnlKanji = new System.Windows.Forms.Panel();
             this.dgvKanji = new System.Windows.Forms.DataGridView();
             this.Han = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Kanji = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnReset = new System.Windows.Forms.Button();
             this.pnlHan = new System.Windows.Forms.Panel();
+            this.tabPListKanji = new System.Windows.Forms.TabPage();
+            this.txtKanji = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnShuffle = new System.Windows.Forms.Button();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.lblCountKanji = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPTestKanji.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKanji)).BeginInit();
+            this.tabPListKanji.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -58,64 +67,111 @@ namespace Anh.DB_definition_diagram__WRS
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Location = new System.Drawing.Point(13, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1380, 616);
+            this.panel1.Size = new System.Drawing.Size(1351, 616);
             this.panel1.TabIndex = 0;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPTestKanji);
+            this.tabControl1.Controls.Add(this.tabPListKanji);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1380, 616);
+            this.tabControl1.Size = new System.Drawing.Size(1351, 616);
             this.tabControl1.TabIndex = 1;
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
-            // tabPage1
+            // tabPTestKanji
             // 
-            this.tabPage1.Controls.Add(this.txtKanji);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1372, 590);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPTestKanji.Controls.Add(this.panel3);
+            this.tabPTestKanji.Controls.Add(this.btnShuffle);
+            this.tabPTestKanji.Controls.Add(this.pnlKanji);
+            this.tabPTestKanji.Controls.Add(this.dgvKanji);
+            this.tabPTestKanji.Controls.Add(this.btnReset);
+            this.tabPTestKanji.Controls.Add(this.pnlHan);
+            this.tabPTestKanji.Location = new System.Drawing.Point(4, 22);
+            this.tabPTestKanji.Name = "tabPTestKanji";
+            this.tabPTestKanji.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPTestKanji.Size = new System.Drawing.Size(1343, 590);
+            this.tabPTestKanji.TabIndex = 1;
+            this.tabPTestKanji.Text = "Test Kanji";
+            this.tabPTestKanji.UseVisualStyleBackColor = true;
             // 
-            // txtKanji
+            // panel3
             // 
-            this.txtKanji.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtKanji.Location = new System.Drawing.Point(6, 6);
-            this.txtKanji.Multiline = true;
-            this.txtKanji.Name = "txtKanji";
-            this.txtKanji.ReadOnly = true;
-            this.txtKanji.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtKanji.Size = new System.Drawing.Size(1091, 570);
-            this.txtKanji.TabIndex = 0;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(229)))), ((int)(((byte)(0)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.lblCountKanji);
+            this.panel3.Controls.Add(this.lblTime);
+            this.panel3.Controls.Add(this.lblCountFail);
+            this.panel3.Controls.Add(this.lblCountSuccess);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Location = new System.Drawing.Point(1019, 7);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(311, 155);
+            this.panel3.TabIndex = 5;
             // 
-            // tabPage2
+            // lblCountFail
             // 
-            this.tabPage2.Controls.Add(this.btnShuffle);
-            this.tabPage2.Controls.Add(this.pnlKanji);
-            this.tabPage2.Controls.Add(this.dgvKanji);
-            this.tabPage2.Controls.Add(this.btnReset);
-            this.tabPage2.Controls.Add(this.pnlHan);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1372, 590);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.lblCountFail.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lblCountFail.Location = new System.Drawing.Point(207, 115);
+            this.lblCountFail.Name = "lblCountFail";
+            this.lblCountFail.Size = new System.Drawing.Size(49, 23);
+            this.lblCountFail.TabIndex = 4;
+            this.lblCountFail.Text = "0";
+            // 
+            // lblCountSuccess
+            // 
+            this.lblCountSuccess.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lblCountSuccess.Location = new System.Drawing.Point(59, 115);
+            this.lblCountSuccess.Name = "lblCountSuccess";
+            this.lblCountSuccess.Size = new System.Drawing.Size(44, 23);
+            this.lblCountSuccess.TabIndex = 3;
+            this.lblCountSuccess.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(156, 34);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 23);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Fail";
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(187)))), ((int)(((byte)(4)))));
+            this.label2.Font = new System.Drawing.Font("Meiryo", 9F);
+            this.label2.Location = new System.Drawing.Point(152, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(1, 111);
+            this.label2.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(3, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 23);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Success";
+            // 
+            // btnShuffle
+            // 
+            this.btnShuffle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnShuffle.Location = new System.Drawing.Point(102, 554);
+            this.btnShuffle.Name = "btnShuffle";
+            this.btnShuffle.Size = new System.Drawing.Size(90, 30);
+            this.btnShuffle.TabIndex = 4;
+            this.btnShuffle.Text = "SHUFFLE";
+            this.btnShuffle.UseVisualStyleBackColor = true;
+            this.btnShuffle.Click += new System.EventHandler(this.btnShuffle_Click);
             // 
             // pnlKanji
             // 
-            this.pnlKanji.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlKanji.AutoScroll = true;
             this.pnlKanji.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlKanji.Location = new System.Drawing.Point(513, 7);
@@ -139,11 +195,12 @@ namespace Anh.DB_definition_diagram__WRS
             this.dgvKanji.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Han,
             this.Kanji});
-            this.dgvKanji.Location = new System.Drawing.Point(1019, 7);
+            this.dgvKanji.Location = new System.Drawing.Point(1019, 177);
             this.dgvKanji.Name = "dgvKanji";
             this.dgvKanji.RowTemplate.Height = 21;
-            this.dgvKanji.Size = new System.Drawing.Size(311, 540);
+            this.dgvKanji.Size = new System.Drawing.Size(311, 370);
             this.dgvKanji.TabIndex = 2;
+            this.dgvKanji.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvKanji_RowPostPaint);
             // 
             // Han
             // 
@@ -169,8 +226,6 @@ namespace Anh.DB_definition_diagram__WRS
             // 
             // pnlHan
             // 
-            this.pnlHan.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlHan.AutoScroll = true;
             this.pnlHan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlHan.Location = new System.Drawing.Point(7, 7);
@@ -178,41 +233,76 @@ namespace Anh.DB_definition_diagram__WRS
             this.pnlHan.Size = new System.Drawing.Size(500, 540);
             this.pnlHan.TabIndex = 0;
             // 
+            // tabPListKanji
+            // 
+            this.tabPListKanji.Controls.Add(this.txtKanji);
+            this.tabPListKanji.Location = new System.Drawing.Point(4, 22);
+            this.tabPListKanji.Name = "tabPListKanji";
+            this.tabPListKanji.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPListKanji.Size = new System.Drawing.Size(1343, 590);
+            this.tabPListKanji.TabIndex = 0;
+            this.tabPListKanji.Text = "List Kanji";
+            this.tabPListKanji.UseVisualStyleBackColor = true;
+            // 
+            // txtKanji
+            // 
+            this.txtKanji.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtKanji.Location = new System.Drawing.Point(6, 6);
+            this.txtKanji.Multiline = true;
+            this.txtKanji.Name = "txtKanji";
+            this.txtKanji.ReadOnly = true;
+            this.txtKanji.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtKanji.Size = new System.Drawing.Size(1091, 570);
+            this.txtKanji.TabIndex = 0;
+            // 
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 635);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1405, 43);
+            this.panel2.Size = new System.Drawing.Size(1376, 43);
             this.panel2.TabIndex = 1;
             // 
-            // btnShuffle
+            // lblTime
             // 
-            this.btnShuffle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnShuffle.Location = new System.Drawing.Point(102, 554);
-            this.btnShuffle.Name = "btnShuffle";
-            this.btnShuffle.Size = new System.Drawing.Size(90, 30);
-            this.btnShuffle.TabIndex = 4;
-            this.btnShuffle.Text = "SHUFFLE";
-            this.btnShuffle.UseVisualStyleBackColor = true;
-            this.btnShuffle.Click += new System.EventHandler(this.btnShuffle_Click);
+            this.lblTime.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTime.Location = new System.Drawing.Point(132, 2);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(45, 23);
+            this.lblTime.TabIndex = 6;
+            this.lblTime.Text = "00:00";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCountKanji
+            // 
+            this.lblCountKanji.Font = new System.Drawing.Font("Arial", 10F);
+            this.lblCountKanji.Location = new System.Drawing.Point(3, 2);
+            this.lblCountKanji.Name = "lblCountKanji";
+            this.lblCountKanji.Size = new System.Drawing.Size(123, 23);
+            this.lblCountKanji.TabIndex = 7;
+            this.lblCountKanji.Text = "Total";
+            this.lblCountKanji.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // RD001201
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1405, 678);
+            this.ClientSize = new System.Drawing.Size(1376, 678);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "RD001201";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Kanji";
             this.Load += new System.EventHandler(this.RD001201_Load);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.tabPTestKanji.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvKanji)).EndInit();
+            this.tabPListKanji.ResumeLayout(false);
+            this.tabPListKanji.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -223,14 +313,22 @@ namespace Anh.DB_definition_diagram__WRS
         private System.Windows.Forms.TextBox txtKanji;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPListKanji;
+        private System.Windows.Forms.TabPage tabPTestKanji;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Panel pnlHan;
         private System.Windows.Forms.DataGridView dgvKanji;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Han;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Kanji;
         private System.Windows.Forms.Panel pnlKanji;
         private System.Windows.Forms.Button btnShuffle;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lblCountFail;
+        private System.Windows.Forms.Label lblCountSuccess;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Han;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Kanji;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label lblCountKanji;
     }
 }

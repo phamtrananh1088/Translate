@@ -123,11 +123,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Lib\Newtonsoft.Json.dll" />
-    <Content Include="Lib\Newtonsoft.Json.xml" />
-    <Content Include="Lib\SpreadsheetGear.dll" />
-    <Content Include="Lib\System.Net.Http.Formatting.dll" />
-    <Content Include="Lib\System.Net.Http.Formatting.xml" />
+    <Content Include="lib\Newtonsoft.Json.dll" />
+    <Content Include="lib\Newtonsoft.Json.xml" />
+    <Content Include="lib\SpreadsheetGear.dll" />
+    <Content Include="lib\System.Net.Http.Formatting.dll" />
+    <Content Include="lib\System.Net.Http.Formatting.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

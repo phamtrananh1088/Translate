@@ -727,7 +727,7 @@ namespace Anh.DB_definition_diagram__WRS
                 //if (!String.IsNullOrEmpty(_toVietNam) && !_toLang.Equals(_toVietNam))
                 //{
                 //	JArray jarr1 = await ActionF1.GetSingle(originalText, _fromLang, _toVietNam);
-                Thread.Sleep(200);
+                Thread.Sleep(300);
                 //	transateTextViet = ActionF1.ReadJArrayRes2(jarr1, false);
                 //}
                 ////ptanh 5/28/2021 ADD END
@@ -880,7 +880,7 @@ namespace Anh.DB_definition_diagram__WRS
                 bool bW = Helper.CanReadFile(sFilePath);
                 if (!bW)
                 {
-                    bW = MessageBox.Show(sFilePath + " is open. Should you close before continue ?", "!ݲ", MessageBoxButtons.YesNo) == DialogResult.Yes;
+                    bW = MessageBox.Show(this, sFilePath + " is open. Should you close before continue ?", "!ݲ", MessageBoxButtons.YesNo) == DialogResult.Yes;
                     if (bW)
                     {
                         int pp = 10;
