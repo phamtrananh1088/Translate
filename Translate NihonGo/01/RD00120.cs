@@ -268,7 +268,7 @@ namespace Anh.DB_definition_diagram__WRS
         }
         #endregion
 
-        #region Translate
+        #region Translatex  
         private async Task<int> FncTranslateSheet(IWorksheet xlSheet, int numPrevRequest)
         {
             List<IRange> arRange = ExtractTranslateDataSheet(xlSheet);
@@ -293,19 +293,32 @@ namespace Anh.DB_definition_diagram__WRS
             int maxRowCount = usedRange.Rows.RowCount;
             // PTANH 2021/12/22 ADD
             // start from selected row
-            if (rbSelectSheet.Checked && !Check.FncCheckEmpty(txtRow.Text))
+            if (rbSelectSheet.Checked && (!Check.FncCheckEmpty(txtRowStart.Text) || !Check.FncCheckEmpty(txtRowEnd.Text)))
             {
-                int startRow = Convert.ToInt32(usedRange.Cells[0, 0].Address.Split(new string[] { "$" }, StringSplitOptions.RemoveEmptyEntries)[1]);
-                int startOfRow = Convert.ToInt32(txtRow.Text);
-                if (startOfRow > startRow)
+                string[] newAddress = usedRange.Address.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+                string[] newAddress0 = newAddress[0].Split(new string[] { "$" }, StringSplitOptions.RemoveEmptyEntries);
+                string[] newAddress1 = newAddress[1].Split(new string[] { "$" }, StringSplitOptions.RemoveEmptyEntries);
+                int startRow = Convert.ToInt32(newAddress0[1]);
+                int endRow = Convert.ToInt32(newAddress1[1]);
+                if (!Check.FncCheckEmpty(txtRowStart.Text))
                 {
-                    int offsetRow = startOfRow - startRow;
-                    maxRowCount -= offsetRow;
-                    string[] newAddress = usedRange.Address.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
-                    string[] newAddress0 = newAddress[0].Split(new string[] { "$" }, StringSplitOptions.RemoveEmptyEntries);
-                    string nAddress = "$" + newAddress0[0] + "$" + startOfRow.ToString() + ":" + newAddress[1];
-                    usedRange = xlSheet.Cells[nAddress];
+                    int startOfRow = Convert.ToInt32(txtRowStart.Text);
+                    if (startOfRow > startRow && startOfRow <= endRow)
+                    {
+                        startRow = startOfRow;
+                    }
                 }
+                if (!Check.FncCheckEmpty(txtRowEnd.Text))
+                {
+                    int endOfRow = Convert.ToInt32(txtRowEnd.Text);
+                    if(endOfRow < endRow && endOfRow >= startRow)
+                    {
+                        endRow = endOfRow;
+                    }
+                }
+                maxRowCount = endRow - startRow + 1;
+                string nAddress = "$" + newAddress0[0] + "$" + startRow.ToString() + ":$" + newAddress1[0] + "$" + endRow.ToString();
+                usedRange = xlSheet.Cells[nAddress];
             }
             //5000 max tring google can translate per request (I will send request that has proper max length)
             for (int columnOffset = 0; columnOffset < maxColumnCount; columnOffset++)
@@ -815,6 +828,13 @@ namespace Anh.DB_definition_diagram__WRS
             {
                 cbSheetName.Focus();
                 return false;
+            }
+            if (rbSelectSheet.Checked){
+                if (!Check.FncCheckEmpty(txtRowStart.Text) && !Check.FncCheckEmpty(txtRowEnd.Text) && Int32.Parse(txtRowStart.Text) > Int32.Parse(txtRowEnd.Text))
+                {
+                    txtRowEnd.Focus();
+                    return false;
+                }
             }
             return true;
         }

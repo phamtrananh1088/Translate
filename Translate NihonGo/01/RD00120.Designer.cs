@@ -47,11 +47,13 @@
             this.numF = new System.Windows.Forms.NumericUpDown();
             this.numT = new System.Windows.Forms.NumericUpDown();
             this.TO = new System.Windows.Forms.Label();
-            this.txtRow = new System.Windows.Forms.TextBox();
+            this.txtRowStart = new System.Windows.Forms.TextBox();
             this.lblRow = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnKanji = new System.Windows.Forms.Button();
+            this.txtRowEnd = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numF)).BeginInit();
@@ -105,10 +107,10 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 193);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 209);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(510, 22);
-            this.statusStrip1.TabIndex = 13;
+            this.statusStrip1.TabIndex = 15;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripProgressBar1
@@ -236,7 +238,7 @@
             // 
             this.numT.Enabled = false;
             this.numT.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.numT.Location = new System.Drawing.Point(257, 96);
+            this.numT.Location = new System.Drawing.Point(258, 96);
             this.numT.Name = "numT";
             this.numT.Size = new System.Drawing.Size(90, 22);
             this.numT.TabIndex = 9;
@@ -258,16 +260,16 @@
             this.TO.Text = "~";
             this.TO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // txtRow
+            // txtRowStart
             // 
-            this.txtRow.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRow.Location = new System.Drawing.Point(130, 123);
-            this.txtRow.Name = "txtRow";
-            this.txtRow.Size = new System.Drawing.Size(90, 22);
-            this.txtRow.TabIndex = 11;
-            this.txtRow.Text = "0";
-            this.txtRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtRow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRow_KeyPress);
+            this.txtRowStart.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRowStart.Location = new System.Drawing.Point(130, 123);
+            this.txtRowStart.Name = "txtRowStart";
+            this.txtRowStart.Size = new System.Drawing.Size(90, 22);
+            this.txtRowStart.TabIndex = 11;
+            this.txtRowStart.Text = "0";
+            this.txtRowStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtRowStart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRow_KeyPress);
             // 
             // lblRow
             // 
@@ -297,10 +299,10 @@
             this.panel2.Controls.Add(this.btnKanji);
             this.panel2.Controls.Add(this.btnPre);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 156);
+            this.panel2.Location = new System.Drawing.Point(0, 172);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(510, 37);
-            this.panel2.TabIndex = 12;
+            this.panel2.TabIndex = 14;
             // 
             // btnKanji
             // 
@@ -313,15 +315,38 @@
             this.btnKanji.UseVisualStyleBackColor = false;
             this.btnKanji.Click += new System.EventHandler(this.btnKanji_Click);
             // 
+            // txtRowEnd
+            // 
+            this.txtRowEnd.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRowEnd.Location = new System.Drawing.Point(258, 123);
+            this.txtRowEnd.Name = "txtRowEnd";
+            this.txtRowEnd.Size = new System.Drawing.Size(90, 22);
+            this.txtRowEnd.TabIndex = 13;
+            this.txtRowEnd.Text = "0";
+            this.txtRowEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.LightGray;
+            this.label4.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.label4.Location = new System.Drawing.Point(220, 123);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 22);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "~";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // RD00120
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(510, 215);
+            this.ClientSize = new System.Drawing.Size(510, 231);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtRowEnd);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblRow);
-            this.Controls.Add(this.txtRow);
+            this.Controls.Add(this.txtRowStart);
             this.Controls.Add(this.TO);
             this.Controls.Add(this.numT);
             this.Controls.Add(this.numF);
@@ -367,12 +392,14 @@
 		private System.Windows.Forms.NumericUpDown numF;
 		private System.Windows.Forms.NumericUpDown numT;
 		private System.Windows.Forms.Label TO;
-        private System.Windows.Forms.TextBox txtRow;
+        private System.Windows.Forms.TextBox txtRowStart;
         private System.Windows.Forms.Label lblRow;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnKanji;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.TextBox txtRowEnd;
+        private System.Windows.Forms.Label label4;
     }
 }
 
