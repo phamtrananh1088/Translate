@@ -764,7 +764,7 @@ namespace Anh.DB_definition_diagram__WRS
                 for (int i1 = 0; i1 < orgTa.Count; i1++)
                 {
                     JdictTrans trans = new JdictTrans();
-                    string s1 = orgTa[i].Orig;
+                    string s1 = orgTa[i1].Orig;
                     if (!Check.FncCheckEmpty(s1))
                     {
                         JObject res = await trans.analyzer(s1);
