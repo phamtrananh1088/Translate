@@ -10,6 +10,8 @@ namespace Anh.Translate.Model
     {
         public string textOrg { get; set; }
         public string textTran { get; set; }
+
+        public string pronounce { get; set; }
         public override string ToString()
         {
             return textOrg + ": " + textTran;

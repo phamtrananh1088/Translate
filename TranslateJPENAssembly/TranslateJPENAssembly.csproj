@@ -52,6 +52,7 @@
     <Compile Include="Action\Google\ActionBase.cs" />
     <Compile Include="Action\Google\ActionF1.cs" />
     <Compile Include="Action\Jdict\JdictTrans.cs" />
+    <Compile Include="Model\ApiModel.cs" />
     <Compile Include="Model\DataReturn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

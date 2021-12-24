@@ -29,11 +29,13 @@ namespace Anh.DB_definition_diagram__WRS
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPTestKanji = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblCountKanji = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.lblCountFail = new System.Windows.Forms.Label();
             this.lblCountSuccess = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,14 +51,16 @@ namespace Anh.DB_definition_diagram__WRS
             this.tabPListKanji = new System.Windows.Forms.TabPage();
             this.txtKanji = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblTime = new System.Windows.Forms.Label();
-            this.lblCountKanji = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPTestKanji.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKanji)).BeginInit();
             this.tabPListKanji.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -113,6 +117,26 @@ namespace Anh.DB_definition_diagram__WRS
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(311, 155);
             this.panel3.TabIndex = 5;
+            // 
+            // lblCountKanji
+            // 
+            this.lblCountKanji.Font = new System.Drawing.Font("Arial", 10F);
+            this.lblCountKanji.Location = new System.Drawing.Point(3, 2);
+            this.lblCountKanji.Name = "lblCountKanji";
+            this.lblCountKanji.Size = new System.Drawing.Size(123, 23);
+            this.lblCountKanji.TabIndex = 7;
+            this.lblCountKanji.Text = "Total";
+            this.lblCountKanji.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTime
+            // 
+            this.lblTime.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTime.Location = new System.Drawing.Point(132, 2);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(45, 23);
+            this.lblTime.TabIndex = 6;
+            this.lblTime.Text = "00:00";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblCountFail
             // 
@@ -183,14 +207,14 @@ namespace Anh.DB_definition_diagram__WRS
             // 
             this.dgvKanji.AllowUserToAddRows = false;
             this.dgvKanji.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvKanji.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvKanji.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvKanji.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvKanji.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Han,
@@ -259,31 +283,51 @@ namespace Anh.DB_definition_diagram__WRS
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.LightGray;
+            this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 635);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1376, 43);
             this.panel2.TabIndex = 1;
             // 
-            // lblTime
+            // btnBack
             // 
-            this.lblTime.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.lblTime.Location = new System.Drawing.Point(132, 2);
-            this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(45, 23);
-            this.lblTime.TabIndex = 6;
-            this.lblTime.Text = "00:00";
-            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.btnBack.Location = new System.Drawing.Point(1257, 4);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(90, 30);
+            this.btnBack.TabIndex = 6;
+            this.btnBack.Text = "BACK";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // lblCountKanji
+            // tableLayoutPanel1
             // 
-            this.lblCountKanji.Font = new System.Drawing.Font("Arial", 10F);
-            this.lblCountKanji.Location = new System.Drawing.Point(3, 2);
-            this.lblCountKanji.Name = "lblCountKanji";
-            this.lblCountKanji.Size = new System.Drawing.Size(123, 23);
-            this.lblCountKanji.TabIndex = 7;
-            this.lblCountKanji.Text = "Total";
-            this.lblCountKanji.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 12;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.332582F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.332584F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.332584F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.332584F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.332584F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.332584F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.332582F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.335084F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.335084F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.335083F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.tableLayoutPanel1.Controls.Add(this.btnBack, 11, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1370, 37);
+            this.tableLayoutPanel1.TabIndex = 7;
             // 
             // RD001201
             // 
@@ -303,6 +347,8 @@ namespace Anh.DB_definition_diagram__WRS
             ((System.ComponentModel.ISupportInitialize)(this.dgvKanji)).EndInit();
             this.tabPListKanji.ResumeLayout(false);
             this.tabPListKanji.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -330,5 +376,7 @@ namespace Anh.DB_definition_diagram__WRS
         private System.Windows.Forms.DataGridViewTextBoxColumn Kanji;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblCountKanji;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnBack;
     }
 }

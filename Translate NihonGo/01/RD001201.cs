@@ -249,5 +249,10 @@ namespace Anh.DB_definition_diagram__WRS
             headerBounds.Inflate(-2, -2);
             e.Graphics.DrawString(rowIdx, grid.RowHeadersDefaultCellStyle.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

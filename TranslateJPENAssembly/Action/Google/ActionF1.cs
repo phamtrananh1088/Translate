@@ -1,4 +1,5 @@
 ﻿using Anh.Translate.Model;
+using Anh.Translate.Model.GoogleApi;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -21,11 +22,14 @@ namespace Anh.Translate
 		/// </summary>
 		/// <param name="tk_q"></param>
 		/// <returns></returns>
-		public async Task<JArray> GetSingle(string q, string sl = "ja", string tl = "en")
+		public async Task<JObject> GetSingle(string q, string sl = "ja", string tl = "en")
 		{
-			string tk = ActionF1.GetTk(q);
+			//PTANH2021/12/24 vandeso1: [2021/12/24yeucau] [update API: use new URL]
+			//string tk = ActionF1.GetTk(q);
 			string encodeQ = Uri.EscapeDataString(q);
-			string tk_q = tk + "&q=" + encodeQ;
+			//PTANH2021/12/24 vandeso1: [2021/12/24yeucau] [update API: use new URL]
+			//string tk_q = tk + "&q=" + encodeQ;
+			string tk_q = "&q=" + encodeQ;
 			string res = "";
 			HttpResponseMessage response = null;
 			try
@@ -45,16 +49,20 @@ namespace Anh.Translate
 					Authen(ref reqH);
 					reqH.Add(HttpRequestHeader.Cookie.ToString(), "NID=188=" + RenCookie());
 					//HTTP GET
-					string[] paths = new string[] { "/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=0&tsel=0&kc=1{2}",
-													"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=3&tsel=3&kc=4{2}",
-													"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=3&tsel=3&kc=1{2}",
-													"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=1&ssel=3&tsel=3&kc=5{2}",
-													"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=3&tsel=3&kc=6{2}",
-													"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=3&tsel=3&kc=2{2}",
-													"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=1&ssel=3&tsel=3&kc=7{2}"};
+					//PTANH2021/12/24 vandeso1: [2021/12/24yeucau] [update API: use new URL]
+					//string[] paths = new string[] { "/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=0&tsel=0&kc=1{2}",
+					//								"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=3&tsel=3&kc=4{2}",
+					//								"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=3&tsel=3&kc=1{2}",
+					//								"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=1&ssel=3&tsel=3&kc=5{2}",
+					//								"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=3&tsel=3&kc=6{2}",
+					//								"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=2&ssel=3&tsel=3&kc=2{2}",
+					//								"/translate_a/single?client=webapp&sl={0}&tl={1}&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=1&ssel=3&tsel=3&kc=7{2}"};
 					//Random r = new Random();
 					//int i = r.Next(0, 7);
-					string path = string.Format(paths[0], sl, tl, tk_q);
+					//PTANH2021/12/24 vandeso1: [2021/12/24yeucau] [update API: use new URL]
+					//string path = string.Format(paths[0], sl, tl, tk_q);
+					string path = string.Format("/translate_a/single?client=gtx&dt=t&dt=bd&dj=1&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=at&sl={0}&tl={1}{2}", sl, tl, tk_q);
+					
 					response = await client.GetAsync(path);
 				}
 			}
@@ -80,9 +88,9 @@ namespace Anh.Translate
 			{
 				res = await response.Content.ReadAsStringAsync();
 			}
-			JArray jj = JsonConvert.DeserializeObject(res) as JArray;
+			JObject jo = JsonConvert.DeserializeObject(res) as JObject;
 
-			return jj;
+			return jo;
 		}
 
 		/// <summary>
@@ -339,78 +347,85 @@ namespace Anh.Translate
 
 			return li;
 		}
-        public List<DataReturn> ReadJArrayRes2(JArray jj, bool Pronoun = true)
+        public List<DataReturn> ReadJArrayRes2(JObject jj, bool Pronoun = true)
         {
             if (jj == null)
             {
                 return null;
             }
-            List<DataReturn> li = new List<DataReturn>();
-            bool bEndCell = false;
-            JToken j_0 = jj[0];
-            StringBuilder sb = new StringBuilder();
-            int iLen = j_0.Count();
-            for (int i = 0; i < iLen; i++)
+			//PTANH2021/12/24 vandeso1: [2021/12/24yeucau] [update API: new API return JObject]
+			TranslateResponse res = jj.ToObject<TranslateResponse>();
+			List<DataReturn> li = new List<DataReturn>();
+            for (int i = 0; i < res.sentences.Count - 1; i++)
             {
-                JToken item = j_0[i];
-                if (item != null)
-                {
-                    if (item[0] != null)
-                    {
-                        //ptanh 05/28/2021 DEL START
-                        //string j_0_0 = item[0].ToString();
-                        //if (j_0_0.EndsWith("\n") || (i == iLen - 2))
-                        //{
-                        //    bEndCell = true;
-                        //}
-                        //else
-                        //{
-                        //    sb.Append(j_0_0);
-                        //}
+				li.Add(new DataReturn { textOrg = res.sentences[i].orig, textTran = res.sentences[i].trans });
+			}
+            //bool bEndCell = false;
+            //JToken j_0 = jj[0];
+            //StringBuilder sb = new StringBuilder();
+            //int iLen = j_0.Count();
+            //for (int i = 0; i < iLen; i++)
+            //{
+            //    JToken item = j_0[i];
+            //    if (item != null)
+            //    {
+            //        if (item[0] != null)
+            //        {
+            //            //ptanh 05/28/2021 DEL START
+            //            //string j_0_0 = item[0].ToString();
+            //            //if (j_0_0.EndsWith("\n") || (i == iLen - 2))
+            //            //{
+            //            //    bEndCell = true;
+            //            //}
+            //            //else
+            //            //{
+            //            //    sb.Append(j_0_0);
+            //            //}
 
-                        //if (bEndCell)
-                        //{
-                        //    string[] rowppT = j_0_0.Split(new string[] { "\n" }, StringSplitOptions.None);
-                        //    string[] rowpp = new string[rowppT.Length > 1 ? rowppT.Length - 1: rowppT.Length];
-                        //    rowpp[0] = (rowppT[0] == "..." ? null : rowppT[0]);
-                        //    if (sb.Length > 0)
-                        //    {
-                        //     rowpp[0] = sb.ToString() + rowpp[0];
-                        //        //when first line is blank, tip: insert 「。。。」, than after translated return value = [. . .]
-                        //        if (rowpp[0]== ". . .")
-                        //        {
-                        //            rowpp[0] = null;
-                        //        }
-                        //    }
-                        //    li.AddRange(rowpp);
-                        //    sb.Clear();
-                        //    bEndCell = false;
-                        //}
-                        //ptanh 05/28/2021 DEL END
-                        //ptanh 05/28/2021 AND START
-                        string j_0_1_ori = item[1].ToString();
-                        string j_0_0_tran = item[0].ToString();
-                        if (li.Count > 0)
-                        {
-                            DataReturn prevData = li[li.Count - 1];
-                            if (prevData.textTran.EndsWith("\n"))
-                                li.Add(new DataReturn { textOrg = j_0_1_ori, textTran = j_0_0_tran });
-                            else
-                            {
-                                prevData.textOrg += j_0_1_ori;
-                                prevData.textTran += j_0_0_tran;
-                            }
-                        } else
-                            li.Add(new DataReturn { textOrg = j_0_1_ori,textTran= j_0_0_tran });
-                        //ptanh 05/28/2021 AND END
-                    }
+            //            //if (bEndCell)
+            //            //{
+            //            //    string[] rowppT = j_0_0.Split(new string[] { "\n" }, StringSplitOptions.None);
+            //            //    string[] rowpp = new string[rowppT.Length > 1 ? rowppT.Length - 1: rowppT.Length];
+            //            //    rowpp[0] = (rowppT[0] == "..." ? null : rowppT[0]);
+            //            //    if (sb.Length > 0)
+            //            //    {
+            //            //     rowpp[0] = sb.ToString() + rowpp[0];
+            //            //        //when first line is blank, tip: insert 「。。。」, than after translated return value = [. . .]
+            //            //        if (rowpp[0]== ". . .")
+            //            //        {
+            //            //            rowpp[0] = null;
+            //            //        }
+            //            //    }
+            //            //    li.AddRange(rowpp);
+            //            //    sb.Clear();
+            //            //    bEndCell = false;
+            //            //}
+            //            //ptanh 05/28/2021 DEL END
+            //            //ptanh 05/28/2021 AND START
+            //            string j_0_1_ori = item[1].ToString();
+            //            string j_0_0_tran = item[0].ToString();
+            //            if (li.Count > 0)
+            //            {
+            //                DataReturn prevData = li[li.Count - 1];
+            //                if (prevData.textTran.EndsWith("\n"))
+            //                    li.Add(new DataReturn { textOrg = j_0_1_ori, textTran = j_0_0_tran });
+            //                else
+            //                {
+            //                    prevData.textOrg += j_0_1_ori;
+            //                    prevData.textTran += j_0_0_tran;
+            //                }
+            //            } else
+            //                li.Add(new DataReturn { textOrg = j_0_1_ori,textTran= j_0_0_tran });
+            //            //ptanh 05/28/2021 AND END
+            //        }
 
-                }
-            }
-            if (Pronoun &&_bOutputPronunciation)
-			{
-				JToken spell = j_0[iLen-1];
-				if (spell[3]!=null)
+            //    }
+            //}
+            if (Pronoun && _bOutputPronunciation && res.sentences.Count >= 2)
+            {
+                //JToken spell = j_0[iLen-1];
+                //if (spell[3]!=null)
+                if (!FncCheckEmpty(res.sentences[res.sentences.Count - 1].src_translit))
 				{
                     //ptanh 05/28/2021 DEL START
                     //string[] rowpp = spell[3].ToString().Split(new string[] { "..."}, StringSplitOptions.RemoveEmptyEntries);
@@ -428,13 +443,14 @@ namespace Anh.Translate
                     //    }
                     //}
                     //ptanh 05/28/2021 DEL END
-                    string[] rowpp = spell[3].ToString().Split(new string[] { "!" }, StringSplitOptions.RemoveEmptyEntries);
+                    //string[] rowpp = spell[3].ToString().Split(new string[] { "!" }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] rowpp = res.sentences[res.sentences.Count - 1].src_translit.Split(new string[] { "!" }, StringSplitOptions.RemoveEmptyEntries);
                     int k = 0;
                     for (int i = 0; i < li.Count; i++)
                     {
                         if (k < rowpp.Length)
                         {
-                            li[i].textTran = li[i].textTran + "\n" + rowpp[k];
+                            li[i].pronounce = rowpp[k];
                             k++;
                         }
                     }
@@ -442,5 +458,13 @@ namespace Anh.Translate
 			}
             return li;
         }
-    }
+		static bool FncCheckEmpty(string text)
+		{
+			if (string.IsNullOrEmpty(text))
+				return true;
+			if (text.Trim().Length == 0)
+				return true;
+			return false;
+		}
+	}
 }

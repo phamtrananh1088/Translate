@@ -27,11 +27,11 @@ namespace Anh.DB_definition_diagram__WRS
         const string startCellCode2 = "( (";
         const string endCellCode = "))";
         const string endCellCode2 = ") )";
-        public int _iMaxRequest = string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("MaxRequest")) ? 200 : int.Parse(ConfigurationManager.AppSettings.Get("MaxRequest"));
-        public string _fromLang = string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("SL")) ? "ja" : ConfigurationManager.AppSettings.Get("SL");
-        public string _toLang = string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("TL")) ? "en" : ConfigurationManager.AppSettings.Get("TL");
-        public string _toVietNam = string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("AddVietNam")) ? "" : "vi";
-        public int _iMaxLenPerRequest = string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("MaxLenPerRequest")) ? 1000 : int.Parse(ConfigurationManager.AppSettings.Get("MaxLenPerRequest"));
+        public int _iMaxRequest = Check.FncCheckEmpty(ConfigurationManager.AppSettings.Get("MaxRequest")) ? 200 : int.Parse(ConfigurationManager.AppSettings.Get("MaxRequest"));
+        public string _fromLang = Check.FncCheckEmpty(ConfigurationManager.AppSettings.Get("SL")) ? "ja" : ConfigurationManager.AppSettings.Get("SL");
+        public string _toLang = Check.FncCheckEmpty(ConfigurationManager.AppSettings.Get("TL")) ? "en" : ConfigurationManager.AppSettings.Get("TL");
+        public string _toVietNam = Check.FncCheckEmpty(ConfigurationManager.AppSettings.Get("AddVietNam")) ? "" : "vi";
+        public int _iMaxLenPerRequest = Check.FncCheckEmpty(ConfigurationManager.AppSettings.Get("MaxLenPerRequest")) ? 1000 : int.Parse(ConfigurationManager.AppSettings.Get("MaxLenPerRequest"));
         public const string ecoEscapeBlank = "'";
         private Dictionary<string, string> _dicTableName;
         private string[] _arraySplitString = new string[] { "=", "＝", "||", "（+）", "(+)", "+", "-", "*", "/", " " };
@@ -70,7 +70,7 @@ namespace Anh.DB_definition_diagram__WRS
             _dicTableName = new Dictionary<string, string>();
             InitializeComponent();
             _widthChange = false;
-            string sFuteikiKoumoku = string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("FuteikiKoumoku")) ? "" : ConfigurationManager.AppSettings.Get("FuteikiKoumoku");
+            string sFuteikiKoumoku = Check.FncCheckEmpty(ConfigurationManager.AppSettings.Get("FuteikiKoumoku")) ? "" : ConfigurationManager.AppSettings.Get("FuteikiKoumoku");
             if (sFuteikiKoumoku.Length > 0)
             {
                 jFuteikiKoumoku = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(sFuteikiKoumoku);
@@ -293,7 +293,7 @@ namespace Anh.DB_definition_diagram__WRS
             int maxRowCount = usedRange.Rows.RowCount;
             // PTANH 2021/12/22 ADD
             // start from selected row
-            if (rbSelectSheet.Checked && !String.IsNullOrEmpty(txtRow.Text))
+            if (rbSelectSheet.Checked && !Check.FncCheckEmpty(txtRow.Text))
             {
                 int startRow = Convert.ToInt32(usedRange.Cells[0, 0].Address.Split(new string[] { "$" }, StringSplitOptions.RemoveEmptyEntries)[1]);
                 int startOfRow = Convert.ToInt32(txtRow.Text);
@@ -361,10 +361,29 @@ namespace Anh.DB_definition_diagram__WRS
             {
                 return offLen;
             }
-            return offLen + v.ToString().Length;
+            int len = 0;
+            if(_fromLang == "ja")
+            {
+                Encoding encodingJapan = Encoding.GetEncoding(932);
+                len = encodingJapan.GetByteCount(v.ToString());
+            }
+            else
+            {
+                len = v.ToString().Length;
+            }
+            return offLen + len;
         }
 
+        public class TranslateInfo
+        {
+           public string Source { get; set; }
+            public string Orig{ get; set; }
+            public string Trans { get; set; }
+            public string HanViet { get; set; }
+            public string Pronounce { get; set; }
+        }
 
+        
         private async Task<int> TranslateSheet(IWorksheet currentSheet, List<IRange> arRange, int numPrevRequest)
         {
             ActionF1 ActionF1 = new ActionF1();
@@ -381,7 +400,7 @@ namespace Anh.DB_definition_diagram__WRS
                     Thread.Sleep(500 + i * 2);
                 whatIR = arRange[i];
                 //DataTable orgTa = whatIR.GetDataTable(SpreadsheetGear.Data.GetDataFlags.NoColumnHeaders); //error convert type double (set columntype = type of first cell
-                DataTable orgTa = GetTableFromIrange(whatIR);
+                List<TranslateInfo> orgTa = GetListTranslateInfo(whatIR);
                 string originalText = GetTextFromTable(orgTa);
                 if (originalText.Length > 5000)
                 {
@@ -391,41 +410,46 @@ namespace Anh.DB_definition_diagram__WRS
                 if (originalText.Length == 0)
                     continue;
                 //ptanh 5/28/2021 ADD END
-                JArray jarr = await ActionF1.GetSingle(originalText, _fromLang, _toLang);
+                JObject joTran = await ActionF1.GetSingle(originalText, _fromLang, _toLang);
 
                 toolStripProgressBar1.Value = (int)((i + 1) * 100 / limit);
                 Thread.Sleep(200);
-                List<DataReturn> transateText = ActionF1.ReadJArrayRes2(jarr);
+                List<DataReturn> transateText = ActionF1.ReadJArrayRes2(joTran);
 
                 List<DataReturn> transateTextViet = null;
                 //ptanh 5/28/2021 ADD START
-                if (!String.IsNullOrEmpty(_toVietNam) && !_toLang.Equals(_toVietNam))
+                if (!Check.FncCheckEmpty(_toVietNam) && !_toLang.Equals(_toVietNam))
                 {
-                    JArray jarr1 = await ActionF1.GetSingle(originalText, _fromLang, _toVietNam);
+                    JObject joTranViet = await ActionF1.GetSingle(originalText, _fromLang, _toVietNam);
                     Thread.Sleep(200);
-                    transateTextViet = ActionF1.ReadJArrayRes2(jarr1, false);
+                    transateTextViet = ActionF1.ReadJArrayRes2(joTranViet, false);
                 }
                 //ptanh 5/28/2021 ADD END
                 // Jdict
-                DataTable tblJdict = orgTa.Copy();
-                tblJdict.Columns.Add("Column2", typeof(string));
-                for (int i1 = 0; i1 < tblJdict.Rows.Count; i1++)
+                for (int i1 = 0; i1 < orgTa.Count; i1++)
                 {
                     JdictTrans trans = new JdictTrans();
-                    String s1 = tblJdict.Rows[i1][0].ToString();
-                    if (!String.IsNullOrEmpty(s1))
+                    string s1 = orgTa[i1].Orig;
+                    if (!Check.FncCheckEmpty(s1))
                     {
-                        JObject res = await trans.analyzer(tblJdict.Rows[i1][0].ToString());
+                        JObject res = await trans.analyzer(s1);
                         List<Kanji> liKanji = res["kanjis"].ToObject<List<Kanji>>();
-                        tblJdict.Rows[i1][1] = String.Join("", s1.ToCharArray().OfType<Char>().Select(u =>
+                        if(liKanji.Count > 0)
                         {
-                            var searchKan = liKanji.Where(m => m.kanji == u.ToString());
-                            if (searchKan.Any())
+                            orgTa[i1].HanViet = String.Join("", s1.ToCharArray().OfType<Char>().Select(u =>
                             {
-                                return searchKan.First().hanviet;
-                            }
-                            return u.ToString();
-                        }));
+                                var searchKan = liKanji.Where(m => m.kanji == u.ToString());
+                                if (searchKan.Any())
+                                {
+                                    return searchKan.First().hanviet;
+                                }
+                                return u.ToString();
+                            }));
+                        }
+                        else
+                        {
+                            orgTa[i1].HanViet = "";
+                        }
                     }
                 }
                 // End Jdict
@@ -433,14 +457,14 @@ namespace Anh.DB_definition_diagram__WRS
                 //JArray jarr = await FakeTrans(originalText);
                 //List<string> transateText = null;
                 ////fake end
-                DataTable traTa = GetTableFromText(transateText, orgTa, transateTextViet, tblJdict);
+                List<TranslateInfo> traTa = SumUpListTranslateInfo(transateText, orgTa, transateTextViet);
                 //translate sucess
                 if (traTa != null)
                 {
-                    for (int im = 0; im < traTa.Rows.Count; im++)
+                    for (int im = 0; im < traTa.Count; im++)
                     {
                         //object vv = traTa.Rows[im][0]; //PTANH 5/28/2021 DEL
-                        object vv = traTa.Rows[im][1]; //PTANH 5/28/2021 ADD
+                        object vv = traTa[im].Trans; //PTANH 5/28/2021 ADD
                                                        //string[] speStart = new string[] {"\n", "「" , "\"","“",};
                         if (vv != null && vv.ToString().Trim().Length > 1)
                         //&& (System.Text.RegularExpressions.Regex.IsMatch(vv.ToString().Trim().Substring(0, 1), @"[a-zA-Z0-9]") || speStart.Contains(vv.ToString().Substring(0, 1))))
@@ -487,22 +511,22 @@ namespace Anh.DB_definition_diagram__WRS
         }
 
         /// <summary>
-        /// Extra dataTable to text
+        /// Extra List<TranslateInfo> to text
         /// </summary>
         /// <param name="orgTa"></param>
         /// <returns></returns>
-        private string GetTextFromTable(DataTable orgTa)
+        private string GetTextFromTable(List<TranslateInfo> orgTa)
         {
             if (orgTa == null)
             {
                 return null;
             }
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < orgTa.Rows.Count; i++)
+            for (int i = 0; i < orgTa.Count; i++)
             {
                 string res = "";
-                DataRow r = orgTa.Rows[i];
-                if (r.IsNull(0) || r[0].ToString().Trim().Length == 0)
+                TranslateInfo r = orgTa[i];
+                if ( Check.FncCheckEmpty(r.Orig))
                 {
                     //ptanh 5/28/2021 DEL START
                     //if (i==0)
@@ -519,7 +543,7 @@ namespace Anh.DB_definition_diagram__WRS
                 }
                 else
                 {
-                    string[] artm = r[0].ToString().Split(new string[] { "\n", "。" }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] artm = r.Orig.Split(new string[] { "\n", "。" }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (artm.Length == 1)
                     {
@@ -565,10 +589,9 @@ namespace Anh.DB_definition_diagram__WRS
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
-        private DataTable GetTableFromIrange(IRange range)
+        private List<TranslateInfo> GetListTranslateInfo(IRange range)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Column1", typeof(string));
+            List<TranslateInfo> listTran = new List<TranslateInfo>();
             object[,] arr = range.Value as object[,];
             StringBuilder sbData = new StringBuilder();
             bool hasFuteikiKoumoku = false;
@@ -593,7 +616,11 @@ namespace Anh.DB_definition_diagram__WRS
                         }
                         if (hasFuteikiKoumoku)
                         {
-                            dt.Rows.Add(sbData.ToString());
+                            //PTANH2021/12/24 vandeso2: [2021/12/24yeucau] [ignore no-Japanese characters]
+                            if (Check.FncCheckJapanaseRegex(sbData.ToString()))
+                                listTran.Add(new TranslateInfo { Source = sbData.ToString(), Orig = sbData.ToString() });
+                            else
+                                listTran.Add(new TranslateInfo { Source = sbData.ToString(), Orig = ""});
                             StatusBar++;
                         }
                         else
@@ -604,30 +631,32 @@ namespace Anh.DB_definition_diagram__WRS
                             itemStrim = itemStrim.Replace("！", "");
                             while (itemStrim.EndsWith("。"))
                                 itemStrim = itemStrim.Substring(0, itemStrim.Length - 1);
-                            dt.Rows.Add(itemStrim);
+                            //PTANH2021/12/24 vandeso2: [2021/12/24yeucau] [ignore no-Japanese characters]
+                            if (Check.FncCheckJapanaseRegex(itemStrim))
+                                listTran.Add(new TranslateInfo { Source = itemStrim, Orig = itemStrim });
+                            else
+                                listTran.Add(new TranslateInfo { Source = itemStrim, Orig = "" });
                             StatusBar++;
                             //PTANH 5/28/2021 ADD END
                         }
                     }
                     else
                     {
-                        dt.Rows.Add("");
+                        listTran.Add(new TranslateInfo { Source = "", Orig = "" });
                         StatusBar ++;
                     }
                 }
             }
-            dt.AcceptChanges();
-            return dt;
+            return listTran;
         }
 
-        private DataTable GetTableFromText(List<DataReturn> orgtex, DataTable orgTa, List<DataReturn> vietText, DataTable dtJdict)
+        
+        private List<TranslateInfo> SumUpListTranslateInfo(List<DataReturn> orgtex, List<TranslateInfo> orgTa, List<DataReturn> vietText)
         {
             if (orgtex == null || orgtex.Count == 0)
             {
                 return null;
             }
-            DataTable dt = orgTa.Copy();
-            dt.Columns.Add("Column2");
             //foreach (DataRow item in orgTa.Rows)
             //{
             //    dt.Rows.Add("");
@@ -640,37 +669,37 @@ namespace Anh.DB_definition_diagram__WRS
             //}
             //ptanh 5/28/2021 DEL END
             //ptanh 5/28/2021 ADD START
-            int iLen = dt.Rows.Count;
+            int iLen = orgTa.Count;
             for (int i = 0, j = 0; i < iLen; i++)
             {
-                if (!string.IsNullOrEmpty(orgTa.Rows[i][0].ToString().Trim()))
+                if (!Check.FncCheckEmpty(orgTa[i].Orig))
                 {
-                    dt.Rows[i][1] = orgtex[j].textTran;
+                    orgTa[i].Trans = orgtex[j].textTran;
                     j++;
                 }
             }
             if (vietText != null)
                 for (int i = 0, j = 0; i < iLen; i++)
                 {
-                    if (!string.IsNullOrEmpty(orgTa.Rows[i][0].ToString().Trim()))
+                    if (!Check.FncCheckEmpty(orgTa[i].Orig))
                     {
-                        dt.Rows[i][1] += "\n" + vietText[j].textTran;
+                        orgTa[i].Trans += "\n" + vietText[j].textTran;
                         j++;
                     }
                 }
-            if (dtJdict != null)
-                for (int i = 0, j = 0; i < iLen; i++)
+            for (int i = 0, j = 0; i < iLen; i++)
+            {
+                if (!Check.FncCheckEmpty(orgTa[i].Orig))
                 {
-                    if (!string.IsNullOrEmpty(orgTa.Rows[i][0].ToString().Trim()))
-                    {
-                        dt.Rows[i][1] += "\n" + dtJdict.Rows[i][0].ToString();
-                        dt.Rows[i][1] += "\n" + dtJdict.Rows[i][1].ToString();
-                        j++;
-                    }
+                    orgTa[i].Trans += "\n" + orgTa[i].Orig;
+                    orgTa[i].Trans += "\n" + orgTa[i].HanViet;
+                    orgTa[i].Trans += "\n";
+                    orgTa[i].Trans += "\n" + orgtex[j].pronounce;
+                    j++;
                 }
+            }
             //ptanh 5/28/2021 ADD END
-            dt.AcceptChanges();
-            return dt;
+            return orgTa;
         }
         #endregion
 
@@ -706,7 +735,7 @@ namespace Anh.DB_definition_diagram__WRS
                     Thread.Sleep(500 + i * 2);
                 whatIR = arRange[i];
                 //DataTable orgTa = whatIR.GetDataTable(SpreadsheetGear.Data.GetDataFlags.NoColumnHeaders); //error convert type double (set columntype = type of first cell
-                DataTable orgTa = GetTableFromIrange(whatIR);
+                List<TranslateInfo> orgTa = GetListTranslateInfo(whatIR);
                 //string originalText = GetTextFromTable(orgTa);
                 //if (originalText.Length > 5000)
                 //{
@@ -724,7 +753,7 @@ namespace Anh.DB_definition_diagram__WRS
 
                 //List<DataReturn> transateTextViet = null;
                 ////ptanh 5/28/2021 ADD START
-                //if (!String.IsNullOrEmpty(_toVietNam) && !_toLang.Equals(_toVietNam))
+                //if (!Check.FncCheckEmpty(_toVietNam) && !_toLang.Equals(_toVietNam))
                 //{
                 //	JArray jarr1 = await ActionF1.GetSingle(originalText, _fromLang, _toVietNam);
                 Thread.Sleep(300);
@@ -732,14 +761,13 @@ namespace Anh.DB_definition_diagram__WRS
                 //}
                 ////ptanh 5/28/2021 ADD END
                 // Jdict
-                DataTable tblJdict = orgTa.Copy();
-                for (int i1 = 0; i1 < tblJdict.Rows.Count; i1++)
+                for (int i1 = 0; i1 < orgTa.Count; i1++)
                 {
                     JdictTrans trans = new JdictTrans();
-                    String s1 = tblJdict.Rows[i1][0].ToString();
-                    if (!String.IsNullOrEmpty(s1))
+                    string s1 = orgTa[i].Orig;
+                    if (!Check.FncCheckEmpty(s1))
                     {
-                        JObject res = await trans.analyzer(tblJdict.Rows[i1][0].ToString());
+                        JObject res = await trans.analyzer(s1);
                         List<Kanji> liKanji = res["kanjis"].ToObject<List<Kanji>>();
                         listKanjis.AddRange(liKanji);
                     }

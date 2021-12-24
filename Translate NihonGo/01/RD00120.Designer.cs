@@ -293,7 +293,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Silver;
+            this.panel2.BackColor = System.Drawing.Color.LightGray;
             this.panel2.Controls.Add(this.btnKanji);
             this.panel2.Controls.Add(this.btnPre);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;

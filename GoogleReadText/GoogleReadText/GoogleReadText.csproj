@@ -54,9 +54,6 @@
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TranslateJPENAssembly">
-      <HintPath>..\..\..\..\WindowsFormsApplication2\WindowsFormsApplication2\lib\TranslateJPENAssembly.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GoogleReadText.cs">
@@ -96,6 +93,12 @@
     <Content Include="Lib\Newtonsoft.Json.xml" />
     <Content Include="Lib\System.Net.Http.Formatting.dll" />
     <Content Include="Lib\System.Net.Http.Formatting.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TranslateJPENAssembly\TranslateJPENAssembly.csproj">
+      <Project>{a6677024-bde4-4d9d-ae78-362309d4255c}</Project>
+      <Name>TranslateJPENAssembly</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

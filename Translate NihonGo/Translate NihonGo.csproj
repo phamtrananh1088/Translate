@@ -65,6 +65,7 @@
     <Compile Include="01\RD001201.Designer.cs">
       <DependentUpon>RD001201.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\GoogleApi\ApiModel.cs" />
     <Compile Include="model\Kanji.cs" />
     <Compile Include="Test.cs">
       <SubType>Form</SubType>
@@ -80,6 +81,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Check.cs" />
     <Compile Include="Utility\FileHelper.cs" />
     <EmbeddedResource Include="01\RD001201.resx">
       <DependentUpon>RD001201.cs</DependentUpon>
